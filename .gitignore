@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+accounts
+ref/
+.RData
+*.RData
+.cache/
+libraries/
+insights-and-R.Rproj
+index.md

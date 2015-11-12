@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Science using Insights and R</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Data Science using Insights and R">
+  <meta name="author" content="Bill Kayser">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <aside class="gdbar">
+    <img src="assets/img/newrelic-logo.jpg">
+  </aside>
+  <hgroup class="auto-fadein">
+    <h1>Data Science using Insights and R</h1>
+    <h2>Introducing R</h2>
+    <p>Bill Kayser<br/>Distinguished Engineer, New Relic</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Let&#39;s get Cooking!</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Basic Ingredients:</p>
+
+<ol>
+<li>Insights REST API</li>
+<li>R Environment for Statistical Computing</li>
+<li>R Libraries:
+
+<ul>
+<li><code>httr</code></li>
+<li><code>dplyr</code></li>
+<li><code>ggplot2</code></li>
+<li><code>igraph</code></li>
+</ul></li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Insights REST API</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Invoke the query action with your NRQL query:</p>
+
+<pre><code class="bash">curl -H &quot;Accept: application/json&quot; -H &quot;X-Query-Key: YOUR_KEY_HERE&quot; \
+&quot;https://insights-api.newrelic.com/v1/accounts/ACCOUNT_ID/query?nrql=NRQL_QUERY&quot;
+</code></pre>
+
+<p><code>{&quot;results&quot;:[{&quot;average&quot;:0.9801766784452296}],&quot;performanceStats&quot;:{&quot;fileReadCount&quot;:2,&quot;inspectedCount&quot;:903,&quot;matchCount&quot;:283,&quot;processCount&quot;:2,&quot;rawBytes&quot;:205286,&quot;decompressedBytes&quot;:205286,&quot;fileProcessingTime&quot;:0,&quot;mergeTime&quot;:0,&quot;ioTime&quot;:0,&quot;decompressionTime&quot;:0,&quot;wallClockTime&quot;:10,&quot;fullCacheHits&quot;:0,&quot;partialCacheHits&quot;:0,&quot;cacheMisses&quot;:0,&quot;cacheSkipped&quot;:2,&quot;maxInspectedCount&quot;:642,&quot;minInspectedCount&quot;:261,&quot;slowLaneFiles&quot;:0,&quot;slowLaneFileProcessingTime&quot;:0,&quot;slowLaneWaitTime&quot;:0,&quot;runningQueriesTotal&quot;:2},&quot;metadata&quot;:{&quot;eventTypes&quot;:[&quot;PageView&quot;],&quot;eventType&quot;:&quot;PageView&quot;,&quot;openEnded&quot;:true,&quot;beginTime&quot;:&quot;2015-11-11T15:09:34Z&quot;,&quot;endTime&quot;:&quot;2015-11-11T16:09:34Z&quot;,&quot;beginTimeMillis&quot;:1447254574073,&quot;endTimeMillis&quot;:1447258174073,&quot;rawSince&quot;:&quot;<code>last_hour</code>&quot;,&quot;rawUntil&quot;:&quot;<code>now</code>&quot;,&quot;rawCompareWith&quot;:&quot;&quot;,&quot;guid&quot;:&quot;1afb-cd3c-a14d955d&quot;,&quot;routerGuid&quot;:&quot;a61e26-6b21d6cbd&quot;,&quot;messages&quot;:[],&quot;contents&quot;:[{&quot;function&quot;:&quot;average&quot;,&quot;attribute&quot;:&quot;duration&quot;,&quot;simple&quot;:true,&quot;openEnded&quot;:false}]}}
+</code></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>REST API Query Keys</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/img/api-keys.png" width="100%"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>R Statistical Computing Environment</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Download R: <a href="www.r-project.org">r-project.org</a></li>
+<li>Use <a href="www.rstudio.org">RStudio</a></li>
+</ul>
+
+<p><img src="assets/img/rstudio.png" width='60%'/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>R Basics - Vectors</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">c(1,2,3)
+</code></pre>
+
+<pre><code>[1] 1 2 3
+</code></pre>
+
+<pre><code class="r">1:10
+</code></pre>
+
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10
+</code></pre>
+
+<pre><code class="r">37
+</code></pre>
+
+<pre><code>[1] 37
+</code></pre>
+
+<h2>R Basics - Assignment</h2>
+
+<pre><code class="r">x &lt;- 1
+y &lt;- &quot;Hello&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>R Basics - Vectors</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">state.abb
+</code></pre>
+
+<pre><code> [1] &quot;AL&quot; &quot;AK&quot; &quot;AZ&quot; &quot;AR&quot; &quot;CA&quot; &quot;CO&quot; &quot;CT&quot; &quot;DE&quot; &quot;FL&quot; &quot;GA&quot; &quot;HI&quot; &quot;ID&quot; &quot;IL&quot;
+[14] &quot;IN&quot; &quot;IA&quot; &quot;KS&quot; &quot;KY&quot; &quot;LA&quot; &quot;ME&quot; &quot;MD&quot; &quot;MA&quot; &quot;MI&quot; &quot;MN&quot; &quot;MS&quot; &quot;MO&quot; &quot;MT&quot;
+[27] &quot;NE&quot; &quot;NV&quot; &quot;NH&quot; &quot;NJ&quot; &quot;NM&quot; &quot;NY&quot; &quot;NC&quot; &quot;ND&quot; &quot;OH&quot; &quot;OK&quot; &quot;OR&quot; &quot;PA&quot; &quot;RI&quot;
+[40] &quot;SC&quot; &quot;SD&quot; &quot;TN&quot; &quot;TX&quot; &quot;UT&quot; &quot;VT&quot; &quot;VA&quot; &quot;WA&quot; &quot;WV&quot; &quot;WI&quot; &quot;WY&quot;
+</code></pre>
+
+<pre><code class="r">state.abb[1]
+</code></pre>
+
+<pre><code>[1] &quot;AL&quot;
+</code></pre>
+
+<pre><code class="r">state.abb[c(1,50)]
+</code></pre>
+
+<pre><code>[1] &quot;AL&quot; &quot;WY&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>R Basics - Vectors</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">5 * c(2,4,6)
+</code></pre>
+
+<pre><code>[1] 10 20 30
+</code></pre>
+
+<pre><code class="r">c(1,2,3) + c(4,5,6)
+</code></pre>
+
+<pre><code>[1] 5 7 9
+</code></pre>
+
+<pre><code class="r">37
+</code></pre>
+
+<pre><code>[1] 37
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>R Basics - Lists</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">list(1, &#39;hey&#39;, NA)
+</code></pre>
+
+<pre><code>[[1]]
+[1] 1
+
+[[2]]
+[1] &quot;hey&quot;
+
+[[3]]
+[1] NA
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>R Basics - Function calls</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">x &lt;- rnorm(10, mean=5, sd=2)
+mean(x)
+</code></pre>
+
+<pre><code>[1] 4.648773
+</code></pre>
+
+<pre><code class="r">sd(x)
+</code></pre>
+
+<pre><code>[1] 1.541567
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>R Basics - Data Frames</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">data.frame(key=c(&quot;Eric&quot;, &quot;Nic&quot;, &quot;Saxon&quot;), grade=c(3,2,1))
+</code></pre>
+
+<pre><code>    key grade
+1  Eric     3
+2   Nic     2
+3 Saxon     1
+</code></pre>
+
+<pre><code class="r">head(mtcars)
+</code></pre>
+
+<pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>R Basics - Data Frames</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">mtcars$mpg
+</code></pre>
+
+<pre><code> [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3
+[14] 15.2 10.4 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3
+[27] 26.0 30.4 15.8 19.7 15.0 21.4
+</code></pre>
+
+<pre><code class="r">mtcars[5:6, c(&#39;mpg&#39;,&#39;cyl&#39;)]
+</code></pre>
+
+<pre><code>                   mpg cyl
+Hornet Sportabout 18.7   8
+Valiant           18.1   6
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Chaining function calls</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">library(dplyr)
+mtcars %&gt;% 
+    select(mpg, cyl, hp) %&gt;%
+    group_by(cyl) %&gt;%
+    summarize(mean_mpg=mean(mpg), mean_hp=mean(hp)) 
+</code></pre>
+
+<pre><code>Source: local data frame [3 x 3]
+
+  cyl mean_mpg   mean_hp
+1   4 26.66364  82.63636
+2   6 19.74286 122.28571
+3   8 15.10000 209.21429
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Using Httr</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Invoke the Insights REST API and return the content as nested lists/vectors</p>
+
+<pre><code class="r">library(httr)
+call &lt;- function(nrql_query) {
+    response &lt;- GET(paste(&quot;https://insights-api.newrelic.com/v1/accounts/&quot;, 
+        account_id, &quot;/query&quot;, sep = &quot;&quot;), query = list(nrql = nrql_query), 
+        as = &quot;text&quot;, accept(&quot;application/json&quot;), add_headers(`X-Query-Key` = api_key))
+    return(content(response))
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>Creating an API Helper</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">call &lt;- function(nrql_query) {
+    message(paste(&quot;Query:&quot;, nrql_query))
+    response &lt;- GET(paste(&quot;https://insights-api.newrelic.com/v1/accounts/&quot;, 
+        account_id, &quot;/query&quot;, sep = &quot;&quot;), query = list(nrql = nrql_query), 
+        as = &quot;text&quot;, accept(&quot;application/json&quot;), add_headers(`X-Query-Key` = api_key))
+    result &lt;- content(response)
+    if (!is.null(result$error)) {
+        stop(&quot;Error in response: &quot;, result$error)
+    }
+    if (!is.null(result$facets)) {
+        ldply(result$facets, as.data.frame)
+    } else if (names(result$results[[1]])[1] == &quot;events&quot;) {
+        ldply(result$results[[1]]$events, as.data.frame)
+    } else {
+        stop(&quot;Unsupported result type; only facets and events supported now.&quot;)
+    }
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Try it out!</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">api &lt;- insights(account_id, api_key)
+api$call(&#39;select name, duration from PageView limit 5&#39;)
+</code></pre>
+
+<pre><code>     timestamp
+1 1.447276e+12
+2 1.447276e+12
+3 1.447276e+12
+4 1.447276e+12
+5 1.447276e+12
+                                                       name duration
+1                         WebTransaction/Servlet/controller    2.594
+2                         WebTransaction/Servlet/controller    3.786
+3                WebTransaction/JSP/giving/givingBasket.jsp    3.002
+4                    WebTransaction/JSP/giving/donation.jsp    4.311
+5 WebTransaction/JSP/view/charity/include/reviewSummary.jsp    2.766
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Create a data frame of page views</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Get the session ids</li>
+<li>Loop over each session id and get the page views for the session</li>
+<li>Do some post processing:
+
+<ul>
+<li>Convert the timestamps from unix time to native times</li>
+<li>Remove unhelpful columns</li>
+<li>Clean up the page names</li>
+<li>Sort in ascending order of time</li>
+</ul></li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>Create a data frame of page views</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">session_ids &lt;- api$get_top_session_ids(app_id, limit = 20)
+sessions_list &lt;- api$get_sessions(session_ids)
+names(sessions_list[[1]])
+</code></pre>
+
+<pre><code> [1] &quot;city&quot;                    &quot;session&quot;                
+ [3] &quot;dnsLookupDuration&quot;       &quot;userAgentName&quot;          
+ [5] &quot;duration&quot;                &quot;domProcessingDuration&quot;  
+ [7] &quot;regionCode&quot;              &quot;countryCode&quot;            
+ [9] &quot;userAgentOS&quot;             &quot;asnLatitude&quot;            
+[11] &quot;backendDuration&quot;         &quot;timestamp&quot;              
+[13] &quot;deviceType&quot;              &quot;connectionSetupDuration&quot;
+[15] &quot;webAppDuration&quot;          &quot;asnLongitude&quot;           
+[17] &quot;networkDuration&quot;         &quot;userAgentVersion&quot;       
+[19] &quot;queueDuration&quot;           &quot;name&quot;                   
+[21] &quot;pageRenderingDuration&quot;   &quot;pageUrl&quot;                
+[23] &quot;secureHandshakeDuration&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>Page Views</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Look at the first page of the first session:</p>
+
+<pre><code class="r">sessions_list[[1]][1,&#39;userAgentName&#39;]
+</code></pre>
+
+<pre><code>[1] Chrome
+Levels: Chrome
+</code></pre>
+
+<pre><code class="r">sessions_list[[1]][1,&#39;session&#39;]
+</code></pre>
+
+<pre><code>[1] 83d3badd5efbb41
+Levels: 83d3badd5efbb41
+</code></pre>
+
+<pre><code class="r">sessions_list[[1]][1,&#39;name&#39;]
+</code></pre>
+
+<pre><code>[1] &quot;view/charity/include/reviewSummary.jsp&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>Combine Page Views from all sessions</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">pages &lt;- rbind.fill(sessions_list)
+head(sort(unique(pages$name)), 10)
+</code></pre>
+
+<pre><code> [1] &quot;about_002dus/contact/index.jsp&quot; &quot;account/givingHistory.jsp&quot;     
+ [3] &quot;account/login.jsp&quot;              &quot;account/newAccount.jsp&quot;        
+ [5] &quot;amex/giving/checkPoints.jsp&quot;    &quot;amex/nonprofits/edit.jsp&quot;      
+ [7] &quot;amex/nonprofits/home.jsp&quot;       &quot;amex/nonprofits/login.jsp&quot;     
+ [9] &quot;controller&quot;                     &quot;error/filenotfound.jsp&quot;        
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Explore the data</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Examine the dataframe</li>
+<li>Summarize some variables</li>
+<li>Tabulate page counts</li>
+<li>Histograms</li>
+<li>Barplot of mean response time by state</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>Network Graphs</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Use <a href="www.igraph.org">igraph</a></li>
+</ul>
+
+<pre><code class="r">install.packages(&#39;igraph&#39;)
+library(igraph)
+</code></pre>
+
+<ul>
+<li>Show directed graph of page flows</li>
+<li>Experiment with node/vertex attributes</li>
+<li>Show different layout algorithms</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>Network Graphs using igraph</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Pick a random session with at least 6 pages:</p>
+
+<pre><code class="r">repeat {
+    session &lt;- sample(sessions_list,1)[[1]]
+    if (nrow(session) &gt; 5) break
+}
+session[1,&#39;session&#39;]
+</code></pre>
+
+<pre><code>[1] d45aed2923c5de1e
+Levels: d45aed2923c5de1e
+</code></pre>
+
+<pre><code class="r">session[1,&#39;city&#39;]
+</code></pre>
+
+<pre><code>[1] Woburn
+Levels: Woburn
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>Network Graphs using iGraph</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Calculate the Transitions within that session</p>
+
+<pre><code class="r">get_transitions &lt;- function(session_events) {
+    n &lt;- nrow(session_events)
+    if (n&lt;2) return(data.frame())
+    from &lt;- vector(&#39;character&#39;)
+    to &lt;- vector(&#39;character&#39;)
+    duration &lt;- vector(&#39;numeric&#39;)
+    for (i in 2:n) {
+        from[i-1] &lt;- as.character(session_events[i-1, &#39;name&#39;])
+        to[i-1] &lt;- as.character(session_events[i, &#39;name&#39;])
+        duration[i-1] &lt;- session_events[i, &#39;duration&#39;]
+    }
+    session_id &lt;- as.character(session_events$session[1])
+    return(data.frame(from=from, to=to, session=c(session_id), duration=duration))
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>Network Graphs - Defaults</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">edges &lt;- get_transitions(session)
+nodes &lt;- group_by(session, name) %&gt;% summarize(count=n(), duration=median(duration, na.rm=T))
+graph &lt;- graph.data.frame(edges, nodes, directed=T)
+plot(graph)
+</code></pre>
+
+<div class="rimage center"><img src="fig/unnamed-chunk-28-1.png" title="plot of chunk unnamed-chunk-28" alt="plot of chunk unnamed-chunk-28" class="plot" /></div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-25" style="background:;">
+  <hgroup>
+    <h2>Network Graphs - Customized</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">V(graph)$label.color &lt;- &quot;black&quot;
+V(graph)$label.family &lt;- &#39;Helvetica&#39;
+V(graph)$label.color &lt;- &#39;black&#39;
+V(graph)$label.cex &lt;- 0.8
+V(graph)$label.dist &lt;- 0.5
+V(graph)$label.degree &lt;- pi/2
+V(graph)$color &lt;- &#39;lightblue&#39;
+V(graph)$size &lt;- 20
+E(graph)$color &lt;- &#39;#CCCCCC&#39;
+E(graph)$curved &lt;- T
+E(graph)$arrow.size &lt;- 1
+E(graph)$width &lt;- 1.0
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-26" style="background:;">
+  <hgroup>
+    <h2>Network Graphs - Customized</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Plot using a different layout algorithm:</p>
+
+<pre><code class="r">plot(graph, layout=layout.kamada.kawai)
+</code></pre>
+
+<div class="rimage center"><img src="fig/unnamed-chunk-30-1.png" title="plot of chunk unnamed-chunk-30" alt="plot of chunk unnamed-chunk-30" class="plot" /></div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-27" style="background:;">
+  <hgroup>
+    <h2>Network Graphs - Node/Edge Attributes</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r"># Linear scale function
+scale &lt;- function(domain, range) {
+    b &lt;- (range[2] - range[1]) / (max(domain) - min(domain))
+    a &lt;- range[1] - b * min(domain)
+    sapply(domain, function(d) { a + b * d })
+}
+# Set node size to scale with number of visits:
+V(graph)$size &lt;- scale(nodes$count, c(10,25))
+
+# Set edge colors to scale with response time from gray to red
+library(RColorBrewer)
+pal &lt;- colorRampPalette(c(&#39;gray&#39;, &#39;red&#39;))
+E(graph)$color &lt;- pal(10)[scale(edges$duration, c(1,10))]
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-28" style="background:;">
+  <hgroup>
+    <h2>Network Graphs - Node/Edge Attributes</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">plot(graph, layout=layout.kamada.kawai)
+</code></pre>
+
+<div class="rimage center"><img src="fig/unnamed-chunk-32-1.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" class="plot" /></div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-29" style="background:;">
+  <hgroup>
+    <h2>Network Graphs - Circle Layout</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">plot(graph, layout=layout.circle)
+</code></pre>
+
+<div class="rimage center"><img src="fig/unnamed-chunk-33-1.png" title="plot of chunk unnamed-chunk-33" alt="plot of chunk unnamed-chunk-33" class="plot" /></div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-30" style="background:;">
+  <hgroup>
+    <h2>Network Graphs - Other Layouts</h2>
+  </hgroup>
+  <article data-timings="">
+    <div class="rimage center"><img src="fig/unnamed-chunk-34-1.png" title="plot of chunk unnamed-chunk-34" alt="plot of chunk unnamed-chunk-34" class="plot" /></div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-31" style="background:;">
+  <hgroup>
+    <h2>Network Graphs - Other Layouts</h2>
+  </hgroup>
+  <article data-timings="">
+    <div class="rimage center"><img src="fig/unnamed-chunk-35-1.png" title="plot of chunk unnamed-chunk-35" alt="plot of chunk unnamed-chunk-35" class="plot" /></div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-32" style="background:;">
+  <hgroup>
+    <h2>Analyze the Distribution</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Create a histogram of pages betwen 0 and 20 second duration.</p>
+
+<pre><code class="r">hist(pages$duration, breaks=seq(0,1+max(pages$duration), by=0.2), xlim=c(0,20))
+</code></pre>
+
+<div class="rimage center"><img src="fig/unnamed-chunk-37-1.png" title="plot of chunk unnamed-chunk-37" alt="plot of chunk unnamed-chunk-37" class="plot" /></div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-33" style="background:;">
+  <hgroup>
+    <h2>Density Plot</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">plot(density(pages$duration), xlim=c(0, 15))
+abline(v=mean(pages$duration), lwd=2, col=&#39;orange&#39;, lty=5)
+abline(v=median(pages$duration), lwd=2, col=&#39;orange&#39;, lty=1)
+legend(x=&#39;topright&#39;, col=&#39;orange&#39;, lwd=2, lty=c(5,1), legend=c(&#39;Mean&#39;, &#39;Median&#39;))
+</code></pre>
+
+<div class="rimage center"><img src="fig/unnamed-chunk-38-1.png" title="plot of chunk unnamed-chunk-38" alt="plot of chunk unnamed-chunk-38" class="plot" /></div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-34" style="background:;">
+  <hgroup>
+    <h2>Maps</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Using <a href="https://cran.r-project.org/web/packages/maps/maps.pdf">maps</a> project.</p>
+
+<pre><code class="r">library(maps)
+library(ggplot2)
+library(mapproj)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-35" style="background:;">
+  <hgroup>
+    <h2>Creating Map Data</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Filter US sessions</li>
+<li>Summarize by State (<code>regionCode</code>)</li>
+<li>Join with table of state names from <code>datasets</code> library: <code>state.abb</code>, <code>state.name</code></li>
+<li>Join with map data for each state</li>
+<li>Re-order to drawing order of map data</li>
+</ol>
+
+<pre><code class="r">state_summary &lt;- filter(pages, countryCode == &#39;US&#39;) %&gt;%
+    group_by(regionCode) %&gt;%
+    summarize(visits=n()) %&gt;% 
+    left_join(data.frame(cbind(state_name=tolower(state.name), regionCode=state.abb)))
+
+state_map_data &lt;- right_join(state_summary, map_data(&#39;state&#39;), by=c(&#39;state_name&#39;=&#39;region&#39;)) %&gt;%
+    arrange(order)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-36" style="background:;">
+  <hgroup>
+    <h2>Using Colors</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">q_visits &lt;- quantile(state_summary$visits, seq(0, 1, length.out=10))
+
+levels &lt;-  cut(state_map_data$visits,
+               q_visits,
+               labels=paste(&quot;Up to&quot;, round(q_visits[1:9]), &quot;page views&quot;),
+               include.lowest = T)
+
+pal &lt;- brewer.pal(9, &#39;YlOrRd&#39;)
+
+ggplot(state_map_data) +
+    aes(x=long, y=lat, group=group, fill=levels) +
+    scale_fill_manual(values=pal) +
+    geom_polygon(fill=&#39;white&#39;, color=&#39;gray&#39;) +
+    geom_polygon(color=&#39;black&#39;) +
+    coord_map(&#39;globular&#39;) +
+    ggtitle(&quot;Traffic Density by State&quot;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-37" style="background:;">
+  <hgroup>
+    <h2>Using Colors</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/img/usmap.png" width="100%"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-38" style="background:;">
+  <hgroup>
+    <h2>Scratching the Surface...</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Statistical tools, regression, ANOVA</li>
+<li>Graphs, Charts with <a href="http://ggplot2.org/">ggplot2</a></li>
+<li>Machine Learning with <a href="caret.r-forge.r-project.org">the caret package</a></li>
+<li>R Web Applications with <a href="http://shiny.rstudio.com/">Shiny</a></li>
+<li><a href="github.com/ramnathv/rCharts">Combining D3 and R with rCharts</a></li>
+<li>Reports with R Markdown and <a href="http://yihui.name/knitr/">knitr</a></li>
+</ul>
+
+<p>Many, many other libraries and tools!</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-39" style="background:;">
+  <hgroup>
+    <h2>Acknowledgements</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Thank you to our customers allowing us to show their data:</p>
+
+<ul>
+<li>Shopify (<a href="http://www.shopify.com">www.shopify.com</a>)</li>
+<li>JustGive (<a href="http://www.justgive.org">www.justgive.org</a>)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Let&#39;s get Cooking!'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Insights REST API'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='REST API Query Keys'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='R Statistical Computing Environment'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='R Basics - Vectors'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='R Basics - Vectors'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='R Basics - Vectors'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='R Basics - Lists'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='R Basics - Function calls'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='R Basics - Data Frames'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='R Basics - Data Frames'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Chaining function calls'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Using Httr'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Creating an API Helper'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Try it out!'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Create a data frame of page views'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='Create a data frame of page views'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='Page Views'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='Combine Page Views from all sessions'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Explore the data'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='Network Graphs'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='Network Graphs using igraph'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='Network Graphs using iGraph'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='Network Graphs - Defaults'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='Network Graphs - Customized'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='Network Graphs - Customized'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='Network Graphs - Node/Edge Attributes'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='Network Graphs - Node/Edge Attributes'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='Network Graphs - Circle Layout'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='Network Graphs - Other Layouts'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='Network Graphs - Other Layouts'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='Analyze the Distribution'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='Density Plot'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='Maps'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='Creating Map Data'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='Using Colors'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='Using Colors'>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='Scratching the Surface...'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='Acknowledgements'>
+         39
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
