@@ -381,7 +381,7 @@ Many, many other libraries and tools!
 
 # References
 
-* Source found on [github: bkayser/insights_r](www.github.com/bkayser/insights_r)
+* Source found on [github: bkayser/insights-and-R](www.github.com/bkayser/insights-and-R)
 * Network Visualization: http://kateto.net/network-visualization
 * Data Science Courses from Johns Hopkins via [Coursera](https://www.coursera.org/specializations/jhudatascience)
 * www.r-project.org
@@ -390,6 +390,6 @@ Many, many other libraries and tools!
 # Acknowledgements
 
 Thank you to [JustGive.org](www.justgive.org) for allowing us to show their data.
-
+xo
 
 

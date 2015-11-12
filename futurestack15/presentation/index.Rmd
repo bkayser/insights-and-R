@@ -532,11 +532,14 @@ Many, many other libraries and tools!
 
 ---
 
-## Acknowledgements
+# References
 
-Thank you to our customers allowing us to show their data:
-* Shopify (www.shopify.com)
-* JustGive (www.justgive.org)
+* Source found on [github: bkayser/insights-and-R](www.github.com/bkayser/insights-and-R)
+* Network Visualization: http://kateto.net/network-visualization
+* Data Science Courses from Johns Hopkins via [Coursera](https://www.coursera.org/specializations/jhudatascience)
+* www.r-project.org
+* www.rstudio.com
 
+# Acknowledgements
 
-
+Thank you to [JustGive.org](www.justgive.org) for allowing us to show their data.
