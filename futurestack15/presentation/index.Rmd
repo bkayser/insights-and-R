@@ -1,6 +1,5 @@
 ---
-title       : Data Science using Insights and R
-subtitle    : Introducing R
+title       : Data Science Using NRDB and R
 author      : Bill Kayser
 job         : Distinguished Engineer, New Relic
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -519,18 +518,21 @@ ggplot(state_map_data) +
 
 ---
 
+---
+
 ## Scratching the Surface...
 
-* Statistical tools, regression, ANOVA
-* Graphs, Charts with [ggplot2](http://ggplot2.org/)
+* Statistical tools, regression analysis
 * Machine Learning with [the caret package](caret.r-forge.r-project.org)
 * R Web Applications with [Shiny](http://shiny.rstudio.com/)
 * [Combining D3 and R with rCharts](github.com/ramnathv/rCharts)
 * Reports with R Markdown and [knitr](http://yihui.name/knitr/)
+* Timeseries analysis and [anomaly detection](https://github.com/twitter/AnomalyDetection).
 
 Many, many other libraries and tools!
 
 ---
+## Thanks!
 
 # References
 
@@ -543,3 +545,5 @@ Many, many other libraries and tools!
 # Acknowledgements
 
 Thank you to [JustGive.org](www.justgive.org) for allowing us to show their data.
+
+

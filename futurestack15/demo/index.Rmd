@@ -1,6 +1,5 @@
 ---
-title       : Data Science using Insights and R
-subtitle    : Introducing R
+title       : Data Science with NRDB and R
 author      : Bill Kayser
 job         : Distinguished Engineer, New Relic
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -32,13 +31,8 @@ source('../../insights_api.R')
 
 Basic Ingredients:
 
-1. Insights REST API
-2. R Environment for Statistical Computing
-3. R Libraries:
-    * `httr`
-    * `dplyr`
-    * `ggplot2`
-    * `igraph`
+1. R Environment for Statistical Computing
+2. Insights REST API
 
 --- .class #id 
 
@@ -53,12 +47,6 @@ curl -H "Accept: application/json" -H "X-Query-Key: YOUR_KEY_HERE" \
 
 <code>{"results":[{"average":0.9801766784452296}],"performanceStats":{"fileReadCount":2,"inspectedCount":903,"matchCount":283,"processCount":2,"rawBytes":205286,"decompressedBytes":205286,"fileProcessingTime":0,"mergeTime":0,"ioTime":0,"decompressionTime":0,"wallClockTime":10,"fullCacheHits":0,"partialCacheHits":0,"cacheMisses":0,"cacheSkipped":2,"maxInspectedCount":642,"minInspectedCount":261,"slowLaneFiles":0,"slowLaneFileProcessingTime":0,"slowLaneWaitTime":0,"runningQueriesTotal":2},"metadata":{"eventTypes":["PageView"],"eventType":"PageView","openEnded":true,"beginTime":"2015-11-11T15:09:34Z","endTime":"2015-11-11T16:09:34Z","beginTimeMillis":1447254574073,"endTimeMillis":1447258174073,"rawSince":"`last_hour`","rawUntil":"`now`","rawCompareWith":"","guid":"1afb-cd3c-a14d955d","routerGuid":"a61e26-6b21d6cbd","messages":[],"contents":[{"function":"average","attribute":"duration","simple":true,"openEnded":false}]}}
 </code>
-
----
-
-## REST API Query Keys
-
-<img src="assets/img/api-keys.png" width="100%"/>
 
 ---
 
@@ -313,6 +301,11 @@ legend(x='topright', col='orange', lwd=2, lty=c(5,1), legend=c('Mean', 'Median')
 ---
 ## Maps
 
+<img src="assets/img/family-income-map.png" width='100%%' />
+
+---
+## Maps
+
 Using [maps](https://cran.r-project.org/web/packages/maps/maps.pdf) project.
 ```{r, cache=F}
 library(maps)
@@ -367,12 +360,12 @@ ggplot(state_map_data) +
 
 ## Scratching the Surface...
 
-* Statistical tools, regression, ANOVA
-* Graphs, Charts with [ggplot2](http://ggplot2.org/)
+* Statistical tools, regression analysis
 * Machine Learning with [the caret package](caret.r-forge.r-project.org)
 * R Web Applications with [Shiny](http://shiny.rstudio.com/)
 * [Combining D3 and R with rCharts](github.com/ramnathv/rCharts)
 * Reports with R Markdown and [knitr](http://yihui.name/knitr/)
+* Timeseries analysis and [anomaly detection](https://github.com/twitter/AnomalyDetection).
 
 Many, many other libraries and tools!
 
@@ -390,6 +383,6 @@ Many, many other libraries and tools!
 # Acknowledgements
 
 Thank you to [JustGive.org](www.justgive.org) for allowing us to show their data.
-xo
+
 
 

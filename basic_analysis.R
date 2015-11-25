@@ -1,21 +1,18 @@
-library(ggplot2)
-
-# API Helper
 source('insights_api.R')
 
-# Pick up keys from environment variables 
-# api_key <- Sys.getenv('NR_KEY')
-# app_id <- Sys.getenv('NR_APPID')
-# account_id <- Sys.getenv('NR_ACCOUNTID')
+# Load in data for an account
 
+install.packages('ggplot2')
 # Create the API helper
+
 api <- insights(account_id, api_key)
 
 # API returns three methods:
 names(api)
 
 # Get top sessions
-session_ids <- api$get_top_session_ids(app_id = app_id, limit=40)
+session_ids <- api$get_top_session_ids(app_id = app_id, size=80)
+session_ids <- api$get_real_session_ids(app_id = app_id, size=80)
 
 # This returns a list of sessions; that is to say, a list
 # of data frames, one per session, of the complete list of page views
@@ -24,6 +21,12 @@ sessions_list <- api$get_sessions(session_ids)
 
 # Combine the list of sessions into a single data frame
 pages <- rbind.fill(sessions_list)
+
+# Save the pages:
+# save(sessions_list, session_ids, account_id, api_key, app_id, file='./accounts/account.RData')
+
+# Load the pages:
+# load('./accounts/account.RData')
 
 # Show the summary information for countries and regions:
 table(pages$countryCode)
